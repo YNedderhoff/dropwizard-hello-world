@@ -3,9 +3,8 @@ package xyz.nedderhoff.dropwizard;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import xyz.nedderhoff.dropwizard.health.TemplateHealthCheck;
 import xyz.nedderhoff.dropwizard.resources.HelloWorldResource;
-//import xyz.nedderhoff.dropwizard.resources.HelloWorldResource;
-//import xyz.nedderhoff.dropwizard.health.TemplateHealthCheck;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
 
@@ -30,6 +29,11 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
                 configuration.getTemplate(),
                 configuration.getDefaultName()
         );
+
+        final TemplateHealthCheck healthCheck =
+                new TemplateHealthCheck(configuration.getTemplate());
+        environment.healthChecks().register("template", healthCheck);
+
         environment.jersey().register(resource);
     }
 }
