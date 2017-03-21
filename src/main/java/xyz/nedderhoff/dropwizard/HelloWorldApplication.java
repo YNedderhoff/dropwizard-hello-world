@@ -3,6 +3,7 @@ package xyz.nedderhoff.dropwizard;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import xyz.nedderhoff.dropwizard.resources.HelloWorldResource;
 //import xyz.nedderhoff.dropwizard.resources.HelloWorldResource;
 //import xyz.nedderhoff.dropwizard.health.TemplateHealthCheck;
 
@@ -25,6 +26,10 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void run(HelloWorldConfiguration configuration,
                     Environment environment) {
-        // nothing to do yet
+        final HelloWorldResource resource = new HelloWorldResource(
+                configuration.getTemplate(),
+                configuration.getDefaultName()
+        );
+        environment.jersey().register(resource);
     }
 }
