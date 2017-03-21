@@ -1,7 +1,7 @@
 Run with
 
 ```
-java -jar target/dropwizard-hello-world-1.0-SNAPSHOT.jar server hello-world.yml
+java -jar target/dropwizard-hello-world-1.0-SNAPSHOT.jar server <path/to/hello-world.yml>
 ```
 
 Calling `http://localhost:8080/hello-world` responds with something like
